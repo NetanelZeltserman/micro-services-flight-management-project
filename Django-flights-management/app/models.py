@@ -45,9 +45,6 @@ class Flight(models.Model):
     remaining_tickets                 = models.IntegerField()
     ticket_economy_price              = models.FloatField()
 
-    ticket_economy_manual_override    = models.BooleanField(default=0) 
-    remaining_tickets_manual_override = models.BooleanField(default=0) 
-
     def is_booked(self, customer_obj) -> bool:
         """
         Check if a customer has already booked a ticket for this flight.

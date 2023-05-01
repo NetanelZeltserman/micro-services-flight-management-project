@@ -54,10 +54,11 @@ class FlightsCRUD(mixins.ListModelMixin,
     queryset = Flight.objects.all()
     serializer_class = FlightsSerializer
 
-    # @method_decorator(user_permissions('change_flight'))
+    @method_decorator(user_permissions('view_flight'))
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
+    @method_decorator(user_permissions('change_flight'))
     def patch(self, request, pk, *args , **kwargs):
         remaining_tickets    = request.data['remaining_tickets']
         ticket_economy_price = float(request.data['ticket_economy_price'])
@@ -71,5 +72,6 @@ class FlightsCRUD(mixins.ListModelMixin,
             return ExceptionsFactory.handle(e)
         # return self.partial_update(request, *args, **kwargs)
 
+    @method_decorator(user_permissions('delete_flight'))
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)

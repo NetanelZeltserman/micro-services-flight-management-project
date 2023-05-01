@@ -1,14 +1,17 @@
 from rest_framework.views  import APIView, Response
 from app.exceptions.factory import ExceptionsFactory
 from app.exceptions.model_not_found import ModelNotFoundException
+from app.permissions.permission import user_permissions
 from app.serializer.users_serializer import UserSerializer
 from app.services.users_service import UsersService
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.models import Permission, User
+from django.utils.decorators import method_decorator
 
 class UserActions(APIView):
     serializer_class = UserSerializer
 
+    @method_decorator(user_permissions('delete_user'))
     def delete(self, request, user_id):
         """
         Delete the user by the user id (used by admins).
@@ -20,6 +23,7 @@ class UserActions(APIView):
         except ModelNotFoundException as e:
             return ExceptionsFactory.handle(e)
 
+    @method_decorator(user_permissions('view_user'))
     def get(self, request, user_id):
         """
         Get the user details by the user id.
@@ -35,6 +39,7 @@ class UserActions(APIView):
             return ExceptionsFactory.handle(e)
 
 
+    @method_decorator(user_permissions('change_user'))
     def put(self, request, user_id):
         """
         Update the user details by the user id.

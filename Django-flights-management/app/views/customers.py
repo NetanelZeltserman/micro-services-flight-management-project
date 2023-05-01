@@ -1,13 +1,15 @@
 from rest_framework.views  import APIView, Response
 from app.exceptions.factory import ExceptionsFactory
 from app.exceptions.model_not_found import ModelNotFoundException
+from app.permissions.permission import user_permissions
 from app.serializer.flights_serializer import FlightsSerializer
 from app.services.customers_service import CustomersService
 from app.services.flights_service import FlightService
 from rest_framework import mixins, generics
 from app.models import Customer
 from app.serializer.customers_serializer import CustomerSerializer
-
+from django.utils.decorators import method_decorator
+from rest_framework.permissions import IsAuthenticated
 
 class CustomerRUD(mixins.ListModelMixin,
                       mixins.RetrieveModelMixin,
@@ -18,12 +20,15 @@ class CustomerRUD(mixins.ListModelMixin,
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
+    @method_decorator(user_permissions('view_customer'))
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
+    @method_decorator(user_permissions('change_customer'))
     def put(self,request, *args , **kwargs):
         return self.update(request, *args, **kwargs)
 
+    @method_decorator(user_permissions('delete_customer'))
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
@@ -32,12 +37,14 @@ class CustomerList(mixins.ListModelMixin, generics.GenericAPIView):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
+    @method_decorator(user_permissions('view_customer'))
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
 
 class GetCustomerFlights(APIView):
     serializer_class = FlightsSerializer
+    permission_classes = (IsAuthenticated,)
  
     def get(self, request, customer_id):
         try:
@@ -57,6 +64,7 @@ class CheckMe(APIView):
     Checks if the current user is a customer by the request user id 
     """
     serializer_class = CustomerSerializer
+    permission_classes = (IsAuthenticated,)
  
     def post(self, request):
         try:

@@ -72,7 +72,6 @@ class TicketService(BaseServiceInterface):
 
         # It's here because when creating a new ticket, it doens't
         # Accept a customer ID, it accepts a customer object.
-        # TODO: Change to a customer ID by the auth request token
         customer = Customer.objects.filter(user_id=user_id).first()
 
         # Check if the flight is already booked
@@ -95,6 +94,10 @@ class TicketService(BaseServiceInterface):
                                             credit_card=credit_card,
                                         )
             customer.save()
+
+            # Add the customer group to the user
+            user.groups.add(2)
+            user.save()
 
 
         # Create a new ticket for the flight, customer = current user

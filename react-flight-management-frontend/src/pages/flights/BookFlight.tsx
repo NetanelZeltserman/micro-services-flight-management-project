@@ -14,6 +14,7 @@ import BookFlightByID from "../api/flights/BookFlightByID";
 import CheckIfUserIsACustomer from "../api/customers/CheckIfUserIsACustomer";
 import { useStoreState } from "easy-peasy";
 import { ApplicationStore } from "../../state";
+import { Button } from "flowbite-react";
 
 
 function BookFlight(){
@@ -21,7 +22,7 @@ function BookFlight(){
     const [flight, setFlight]         = useState<Flight>();
     const [isNotFound, setIsNotFound] = useState(false);
     const [isLoading, setIsLoading]   = useState(true);
-    const UserID = useStoreState((state: ApplicationStore) => state!.user!.data)?.id;
+    const UserData = useStoreState((state: ApplicationStore) => state!.user!.data);
 
     useEffect(() => {
         setIsLoading(true);
@@ -87,6 +88,7 @@ function BookFlight(){
 
     const [isUserExistingCustomer, setIsUserExistingCustomer] = useState(false);
     const [isUserEXistingCustomerLoading, setIsUserEXistingCustomerLoading] = useState(false);
+    const [isUser, setIsUser] = useState(false);
 
     
 
@@ -159,30 +161,41 @@ function BookFlight(){
     useEffect(() => {
         setIsLoading(true);
 
-        if(UserID){
+        if(UserData){
+            if(UserData.id){
 
-            CheckIfUserIsACustomer(UserID)
-                .then((response) => {
-                    // Weclome back...
+                setIsUser(true);
 
-                    // Set customer details
-                    setCustomerName(response.name);
-                    setCustomerSurname(response.surname);
-                    setCustomerEmail(response.email);
-                    setCustomerPhone(response.phone);
-                    setCustomerAddress(response.address);
-                    setCustomerCreditCard(response.credit_card);
+                CheckIfUserIsACustomer(UserData.id)
+                    .then((response) => {
+                        // Weclome back...
 
-                    setIsUserExistingCustomer(true);
-                    setIsUserEXistingCustomerLoading(false);
+                        // Set customer details
+                        setCustomerName(response.name);
+                        setCustomerSurname(response.surname);
+                        setCustomerEmail(response.email);
+                        setCustomerPhone(response.phone);
+                        setCustomerAddress(response.address);
+                        setCustomerCreditCard(response.credit_card);
 
-                    
-                })
-                // No need for .catch here cuz it will always return 
-                // an error if the user is not a customer, nothing to change here
+                        setIsUserExistingCustomer(true);
+                        setIsUserEXistingCustomerLoading(false);
+
+                        
+                    })
+                    // No need for .catch here cuz it will always return 
+                    // an error if the user is not a customer, nothing to change here
+            }
+            else{
+                setIsUser(false);
+                setIsLoading(false);
+            }
+        }else{
+            setIsUser(false);
+            setIsLoading(false);
         }
     
-    }, [UserID])
+    }, [UserData])
     
 
     return( 
@@ -211,8 +224,8 @@ function BookFlight(){
                     {
                         () => {
                             return (
-                    <Form className="gap-2 md:grid md:grid-cols-3 ">
-                        <div className="col-span-2 p-5">
+                    <Form className={`${(isUser) ? 'gap-2 md:grid md:grid-cols-3' : ''}`}>
+                        <div className={`${(isUser) ? 'col-span-2' : 'justify-center items-center'} p-5`}>
 
                             <h1 className="text-xl font-medium text-gray-700">Book Your Flight</h1>
                             <p className="text-sm text-gray-600">You're one step closer to booking flight #{pk}</p>
@@ -224,7 +237,26 @@ function BookFlight(){
                                 )
                             }
                             {
-                                (!isUserEXistingCustomerLoading && !isLoading && isUserExistingCustomer) && (
+                                (!isUser && !isLoading) && (
+                                    <div className="flex flex-col items-center justify-center mt-6 py-14">
+                                        <img
+                                            className="w-40 mb-4"
+                                            src={`${window.location.origin}/undraw_welcome_back.svg`}
+                                            alt="Welcome back"
+                                        />
+                                        <h1 className="mt-4 text-xl font-medium text-gray-700">You must be a user to continue!</h1>
+                                        <Link to="/register">
+                                            <Button
+                                                className="mt-4 bg-sky-500 hover:bg-sky-600"
+                                            >
+                                            Create An Account
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                )      
+                            }
+                            {
+                                (isUser && !isUserEXistingCustomerLoading && !isLoading && isUserExistingCustomer) && (
                                     <div className="flex flex-col items-center justify-center mt-6 py-14">
                                         <img
                                             className="w-40 mb-4"
@@ -236,33 +268,28 @@ function BookFlight(){
                                 )
                             }
                             {
-                                (!isUserEXistingCustomerLoading && !isUserExistingCustomer && !isLoading && flight) && (
+                                (isUser && !isUserEXistingCustomerLoading && !isUserExistingCustomer && !isLoading && flight) && (
                                     <div key={flight.id}>
                                         <div className="flex justify-between pt-6 mt-6 border-t">
                                             <div className="flex items-center">
-                                                            <div className="w-full rounded">
-                                                                <div className="grid grid-cols-2 gap-x-8">
-                                                                    <Input name="FirstName"  label="First Name"  />
-                                                                    <Input name="SurName"    label="Last Name"   />
+                                                <div className="w-full rounded">
+                                                    <div className="grid grid-cols-2 gap-x-8">
+                                                        <Input name="FirstName"  label="First Name"  />
+                                                        <Input name="SurName"    label="Last Name"   />
 
-                                                                    <Input name="Email"      label="Email"       />
-                                                                    <Input name="Phone"      label="Phone"       />
-                                                                    <Input name="Address"    label="Address"     />
-                                                                    <Input name="CreditCard" label="Credit Card" readOnly className="w-full px-3 py-2 leading-tight text-gray-700 border-2 border-gray-100 rounded shadow appearance-none cursor-not-allowed focus:outline-none focus:shadow-outline"/>
-                                                                </div>
-
-                                                            </div>
+                                                        <Input name="Email"      label="Email"       />
+                                                        <Input name="Phone"      label="Phone"       />
+                                                        <Input name="Address"    label="Address"     />
+                                                        <Input name="CreditCard" label="Credit Card" readOnly className="w-full px-3 py-2 leading-tight text-gray-700 border-2 border-gray-100 rounded shadow appearance-none cursor-not-allowed focus:outline-none focus:shadow-outline"/>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            {/* <div className="flex items-center">
-                                                <i className="pr-2 text-sm fa fa-arrow-left"></i>
-                                                <span className="font-medium text-blue-500 cursor-pointer text-md">Continue Shopping</span>
-                                            </div> */}
                                         </div>
                                     </div>
                                 )
                             }
                             {
-                                !isLoading &&
+                                isUser && !isLoading &&
                                 <div className="flex items-center justify-between pt-6 mt-6 border-t"> 
                                     <Link to="/" className="flex items-center">
                                         <span className="text-sm font-medium cursor-pointer text-sky-500 hover:text-sky-600">Cancel. I'll find a different flight</span>
@@ -275,13 +302,14 @@ function BookFlight(){
                             }
                         </div>
 
-                            
+                        {
+                            isUser && (
                         <div className="p-5 overflow-visible bg-gray-100 rounded shadow ">
 
                             <span className="text-xs text-gray-500">Card Type</span>
                             <div className="flex items-center justify-between mt-2 overflow-visible">
 
-                            
+
 
 
                                 <div className="relative px-4 py-2 bg-gray-400 rounded w-52 h-28 right-10">
@@ -380,9 +408,9 @@ function BookFlight(){
                             </div>
 
 
-                            <div className={`${isLoading && 'cursor-not-allowed'}`}>
+                            <div className={`${(isLoading || !isUser) && 'cursor-not-allowed'}`}>
                             <button
-                                className={`${isLoading && 'pointer-events-none'} w-full h-12 shadow-lg text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:ring-sky-200 rounded focus:outline-none`}
+                                className={`${(isLoading || !isUser) && 'pointer-events-none'} w-full h-12 shadow-lg text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:ring-sky-200 rounded focus:outline-none`}
                                 type="submit"
                             >
                                 Book Flight
@@ -393,7 +421,7 @@ function BookFlight(){
 
 
                         </div>
-
+                        )}
                         
                     </Form>
                             )
