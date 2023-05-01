@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Avatar, Button, Dropdown, Navbar } from "flowbite-react"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import http, { isAuthenticted } from "../pages/api/http";
 import { ApplicationStore } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -161,23 +161,24 @@ export default function NavbarComponent(){
       <Navbar.Toggle />
 
       <Navbar.Collapse>
-        <Navbar.Link
-          as={Link}
-          to="/"
-          active={true}
-          theme={{base: 'text-gray-600 hover:text-sky-500', active: {on: 'text-sky-500'}}}
-        >
-          Home
+        <Navbar.Link>
+          <NavLink 
+            to="/" 
+            className={({ isActive }) =>
+                        isActive ? 'text-sky-500' : 'hover:text-sky-500'}
+          >
+            Home
+          </NavLink>
         </Navbar.Link>
-        <Navbar.Link 
-          as={Link}
-          to="/about"
-          theme={{active: {off: 'text-gray-600 hover:text-sky-500'}}}
-        >
-          About
-        </Navbar.Link>
-        <Navbar.Link theme={{active: {off: 'text-gray-600 hover:text-sky-500'}}} href="/navbars">
-          Services
+
+        <Navbar.Link>
+          <NavLink
+            to="/about" 
+            className={({ isActive }) =>
+                        isActive ? 'text-sky-500' : 'hover:text-sky-500'}
+          >
+            About
+          </NavLink>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>

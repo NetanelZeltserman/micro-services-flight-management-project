@@ -141,7 +141,7 @@ export const FlightCard: React.FC<Flight> = ({
                         .typeError("The price must be a number")
                         .min(100, "What are we, a crapy lower cost company? Seriously?")
                         .required("A price is required, we don't print money out of thin air...")
-                        .max(1000, "The price is too high, we don't fly billionaires here...")
+                        .max(3000, "The price is too high, we don't fly billionaires here...")
                         .positive("The price must be positive, we don't pay you to fly...")
     });
 
@@ -419,10 +419,9 @@ export const FlightCard: React.FC<Flight> = ({
                         <p className="text-xs text-gray-500">Price per adult</p>
                     </div>
                 </div>
-                <div className={`absolute right-0 top-2 ${isFlightBooked && 'cursor-not-allowed'}`}>
-                    {/* TODO: Maybe replace this w/ gardient combination of light blues? */}
+                <div className={`absolute right-0 top-2 ${(isFlightBooked || remainingTickets === 0) && 'cursor-not-allowed'}`}>
                     <button
-                        className={`${isFlightBooked && 'pointer-events-none'} flex justify-center w-32 mx-6 mt-2 text-white border border-solid rounded shadow-sm h-9 hover:shadow-md active:shadow-md bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:ring-sky-200 place-items-center`}
+                        className={`${(isFlightBooked || remainingTickets === 0) && 'pointer-events-none'} flex justify-center w-32 mx-6 mt-2 text-white border border-solid rounded shadow-sm h-9 hover:shadow-md active:shadow-md bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:ring-sky-200 place-items-center`}
                         onClick={() => !isAuthenticted() ? ToggleSignUpToContinueModal() : onFlightBook()}
                     >
                     Book
