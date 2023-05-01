@@ -26,5 +26,5 @@
   },
   "include": [
     "src"
-, "src/pages/api/flights/.ts"  ]
+, "src/pages/api/flights/.ts", "src/pages/api/admin/customers/.ts"  ]
 }

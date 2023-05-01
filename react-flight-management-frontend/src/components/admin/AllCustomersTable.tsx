@@ -96,7 +96,16 @@ export default function AllUsersTable() {
                     </Table.Cell>
                     <Table.Cell>
                       <div className="flex items-center gap-x-3 whitespace-nowrap">
-                          <EditCustomerModal />
+                          <EditCustomerModal
+                            customerID={customer.id}
+                            firstName={customer.name}
+                            surName={customer.surname}
+                            email={customer.email}
+                            address={customer.address}
+                            phoneNumber={customer.phone}
+                            creditCard={customer.credit_card}
+                            RelatedUser={customer.user}
+                          />
                           {/* <DeleteCustomerModal /> */}
                       </div>
                     </Table.Cell>

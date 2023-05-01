@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import GetFlightDetails from "../api/flights/GetFlightDetails";
 import { Flight } from "../HomePage";
 import { faker } from '@faker-js/faker';
-import { object, string } from "yup";
+import { number, object, string } from "yup";
 import { Formik, Form } from "formik";
 import { ToastContainer, toast } from 'react-toastify';
 import { Input } from "../../components/Input";
@@ -77,7 +77,7 @@ function BookFlight(){
     const [customerName, setCustomerName]             = useState(faker.name.firstName);
     const [customerSurname, setCustomerSurname]       = useState(faker.name.lastName);
     const [customerEmail, setCustomerEmail]           = useState(faker.internet.email);
-    const [customerPhone, setCustomerPhone]           = useState(faker.phone.number('0#########'));
+    const [customerPhone, setCustomerPhone]           = useState(faker.phone.number('2#########'));
     const [customerAddress, setCustomerAddress]       = useState(`${faker.address.streetAddress(true)}, ${faker.address.city()}, ${faker.address.country()}`);
     const [customerCreditCard, setCustomerCreditCard] = useState(faker.finance.creditCardNumber('visa').replaceAll('-', ''));
 
@@ -117,8 +117,8 @@ function BookFlight(){
 
         Phone:      string()
                         .required("A Phone Number is required")
-                        .min(10, "Must be at least 10 characters")
-                        .max(10, "Must be max 10 characters"),
+                        .max(10, "Must be exactly 10 characters")
+                        .matches(/^\d+$/, 'This field is numeric only'),
 
 
         Address:    string()
@@ -280,7 +280,9 @@ function BookFlight(){
                                                         <Input name="Email"      label="Email"       />
                                                         <Input name="Phone"      label="Phone"       />
                                                         <Input name="Address"    label="Address"     />
-                                                        <Input name="CreditCard" label="Credit Card" readOnly className="w-full px-3 py-2 leading-tight text-gray-700 border-2 border-gray-100 rounded shadow appearance-none cursor-not-allowed focus:outline-none focus:shadow-outline"/>
+                                                        <div className="appearance-none pointer-events-none cursor-not-allowed focus:outline-none focus:shadow-outline">
+                                                            <Input name="CreditCard" label="Credit Card" readOnly />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

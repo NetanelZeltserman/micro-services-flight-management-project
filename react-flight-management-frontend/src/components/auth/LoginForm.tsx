@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Formik, Form, useField, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { object, string } from "yup";
 import Login from "../../pages/api/auth/login";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,34 +9,12 @@ import getUserDetails from "../../pages/api/auth/getUserDetails";
 import { Actions, useStoreActions } from 'easy-peasy';
 import { ApplicationStore } from "../../state";
 import SpinnerComponent from "../Spinner";
+import { Input } from "../Input";
 
 const LoginValidation = object().shape({
   username: string().required("An username is required").min(3, "Must be at least 3 characters"),
   password: string().required("A password is required").min(8, "Must be at least 8 characters"),
 });
-
-const Input = ({ name, label, ...props }: any) => {
-  const [field, meta] = useField(name);
-  return (
-    <div className="mb-4">
-      <label className="block text-sm font-bold text-gray-700" htmlFor={field.name}>
-        {label}
-      </label>
-      <input
-        className={`${
-          meta.error && meta.touched ? "border-red-500" : ""
-        } shadow appearance-none border border-gray-200 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-0 focus:ring-4 focus:ring-sky-200`}
-        {...field}
-        {...props}
-      />
-      <ErrorMessage
-        name={field.name}
-        component="div"
-        className="text-xs text-red-500"
-      />
-    </div>
-  );
-};
 
 function LoginForm() {
   const navigate = useNavigate();

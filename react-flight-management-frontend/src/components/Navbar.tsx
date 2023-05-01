@@ -148,14 +148,14 @@ export default function NavbarComponent(){
             </Button>
           </Link>
 
-        <Link to="/login">
-          <Button color="light"
-            pill={true}
-            className="shadow-sm hover:shadow-md focus:ring-0 focus:border-0"
-            >
-            Login
-          </Button>
-        </Link>
+          <Link to="/login">
+            <Button color="light"
+              pill={true}
+              className="shadow-sm hover:shadow-md focus:ring-0 focus:border-0"
+              >
+              Login
+            </Button>
+          </Link>
         </div>
       }
       <Navbar.Toggle />
@@ -180,6 +180,18 @@ export default function NavbarComponent(){
             About
           </NavLink>
         </Navbar.Link>
+
+        {
+          <Navbar.Link>
+            <NavLink
+              to="/admin" 
+              className={({ isActive }) =>
+              isActive ? 'text-sky-500' : 'hover:text-sky-500'}
+              >
+              Admin Area
+            </NavLink>
+        </Navbar.Link>
+        }
       </Navbar.Collapse>
     </Navbar>
     )
