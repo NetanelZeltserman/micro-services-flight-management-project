@@ -1,96 +1,41 @@
-
 export default function AboutPage(){
     return (
         <div className="flex justify-center items-start">
                 <div className="flex flex-col min-w-[55rem] max-w-6xl h-full my-12 p-16 shadow-md text-left text-gray-700 bg-white border border-gray-200 rounded-md">
                     <section className="text-lg">
-                        <h2 className="text-2xl text-gray-800 font-medium underline">Introduction</h2>
+                        <h2 className="text-2xl text-gray-800 font-medium underline">Aero Three – Python Project</h2>
                         <p>
-                            AeroThree is a “One Stop Shop” Tourism app.
-                            <br/>
-                            The app is <span className="underline decoration-wavy decoration-sky-300">intended to be a full tourism portal</span> in order to serve all of a person's needs when visiting another country.
-                            <br/>
-                            Right now the only section that is working is the “Flights” section but in the future, the app can also be used to find related services such as Hotels, Car Rentals, etc. due to <span className="underline decoration-wavy decoration-sky-300">its micro-services architecture which allows the app to scale and expand quickly</span>.
+                        Aero Three is a comprehensive tourism app designed to be a one-stop shop for all your travel needs. While currently only the "Flights" section is available, the app is intended to include additional features in the future, such as finding hotels, car rentals, and more.
+                        </p>
+                        <p>
+                        To ensure that the app can accommodate any future directions the business may take, it has been built using Micro Services Architecture. This allows us to expand the app as needed, while keeping each section self-contained and manageable.
                         </p>
                     </section>
 
                     <section className="mt-8 text-lg">
-                        <h2 className="text-2xl text-gray-800 font-medium underline">Workflow schema</h2>
+                        <h2 className="text-2xl text-gray-800 font-medium underline">App Workflow schema</h2>
                         <img
                             className="mb-4"
                             src={`${window.location.origin}/workflow_ill.jpg`}
                             alt='workflow scheme'
                         />
-                        <p>The Idea behind the app is <span className="underline decoration-wavy decoration-sky-300">the ability to expand the app as the business grows</span>, therefore the app is built using the Micro-Services Architecture to accommodate every future direction the business will decide to approach.</p>
                     </section>
-
                     <section className="mt-8 text-lg">
                         <h2 className="text-2xl text-gray-800 font-medium underline">Technology and usage</h2>
-                        <ul>
-                            <li className="text-xl mt-6 font-medium text-gray-800">Django</li>
                             <p className="pl-6">
-                                This Framework together with Django REST API is used as the main backend platform.
-                                <br/>
-                                Django is mainly used for orchestrating the connections of all the working parts of the app and mainly responsible to manage users and credentials.
-                                <br/>
-                                As the main backend framework for the system, all of the requests are routed through the Django “urls” file.
-                                <br/>
-                                Each request is being forwarded to the “view” that is split to different files according to entities.
-                                <br/>
-                                The View files are in charge to call the corresponding service files and return the data as REST API calls.
+                            The app's main backend platform is built on the Django Framework, along with Django REST API. Django is responsible for orchestrating the connections of all the different parts of the app and managing user credentials. All requests are routed through the Django "url" file, and each request is forwarded to the corresponding "view" file, which is split into different files based on entities. The view files call the corresponding service files and return the data as REST API calls.
                             </p>
-                            <li className="text-xl mt-6 font-medium text-gray-800">FastAPI</li>
+                            <p className="pl-6">For micro services that receive and send requests, we use Fast API. This lightweight and fast framework contains all of the business logic needed for the different sections of the app, both current and future. Since it is focused on REST API calls, it's easy to forward requests to cloud-based APIs and process the received data for storage in the database. The available API calls can be examined by navigating to the "/docs" URL.
+                            </p>
+                            <p className="pl-6">In the future, each business section will be a closed micro service. The micro service will receive API requests and call different cloud services to retrieve the necessary data. Once the data is received, the micro service will process it according to the app's business logic and return the appropriate response to the main Django app.
+                            </p>
+                            <p className="pl-6">Our main database is MySQL, which is connected to each section of the app. As the business grows, we can add more connections to the database as needed. Since the database is separated from the main frameworks, it can be used with a load balancer and redundant mirror connections. The database for this project is located on a separate server, and it can also be accessed through the PHP My Admin interface.
+                            </p>
+                            <p className="pl-6">Using React JS as the Frontend of our app enabled us to create dynamic user interfaces. It is a powerful tool that could also be integrated in future updates. With React, we break down the app into components, making it easier to manage and update individual parts of the application. Additionally, React helped us improve the app's performance by rendering only the necessary components. The use of React JS can help enhance the user experience of the Aero Three app and make it more scalable in the future.
+                            </p>
                             <p className="pl-6">
-                                For Micro Service that is intended to receive and send requests, FastAPI is ideal since it is fast and lightweight and doesn't require many lines of code in order to get the job done.
-                                <br/>
-                                This framework allows us to contain all of the business logic needed for the different current and future sections of the app in one place.
-                                <br/>
-                                Since it is focused on REST API calls it is very easy to forward the requests to any cloud based API and receive more data that later can be processed easily and be stored in the DB and sent back to the Django for further use.
-                                <br/>
-                                By using the ………/docs url it is possible to examine all of the available API Calls
-                                <br/>
-                                In the future, each business section is supposed to be in a closed Micro Service, The Micro Service purpose is to receive API requests and call different cloud services.
-                                <br/>
-                                Once the Data is received from different sources, the Micro Service will receive and process the data according to the business logic needed by the app, and return the right response back to the Main Django app.
+                                Nginx is used as the main web server for the system. It is used to route the requests to the correct server and also to serve the static files. And as a reverse proxy for the Django app and the FastAPI app.
                             </p>
-
-                            <li className="text-xl mt-6 font-medium text-gray-800">React</li>
-                            <p className="pl-6">
-                                Used as the Main Frontend technology <span className="bg-red-100 text-red-500 font-medium px-2 p-1 rounded">EXPAND THIS SECTION!</span>
-                            </p>
-
-                            <li className="text-xl mt-6 font-medium text-gray-800">MySQL</li>
-                            <p className="pl-6">
-                                As the main DB of the system, each section of the app has a connection to the DB. 
-                                <br/>
-                                As the business grows more connections for the DB can be added as needed and also since the DB is separated from the main Frameworks it can be used with a load balancer and or redundant mirror connections. 
-                                <br/>
-                                The DB for this projects sits on a separate server and all other parts of the system are connected to it. 
-                                <br/>
-                                The DB can also be accessed using "PHPMyAdmin" (PMA) interface.
-                            </p>
-
-                            <li className="text-xl mt-6 font-medium text-gray-800">Nginx</li>
-                            <p className="pl-6">
-                                Nginx is used as the main web server for the system.
-                                <br/>
-                                It is used to route the requests to the correct server and also to serve the static files.
-                                <br/>
-                                And as a reverse proxy for the Django app and the FastAPI app.
-                                <br/>
-                            </p>
-
-                            <li className="text-xl mt-6 font-medium text-gray-800">How to use the system</li>
-                            <p className="pl-6">
-                                A short description perhaps? A couple of images for good faith?
-
-                                <h3 className="text-lg font-medium mt-4 text-gray-800">Modules and features</h3>
-                                <p className="pl-6">...</p>
-
-                                <h3 className="text-lg font-medium mt-4 text-gray-800">Main controls, buttons, and pages</h3>
-                                <p className="pl-6">...</p>
-                            </p>
-                        </ul>
                     </section>
                 </div>
         </div>
