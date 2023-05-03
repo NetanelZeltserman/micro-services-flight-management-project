@@ -20,6 +20,9 @@ export default function NavbarComponent(){
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(isAuthenticted());
   const updateUserData  = useStoreActions((actions: Actions<ApplicationStore>) => actions.user.updateUserData);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+
   useEffect(() => {
 
     console.debug('Username & Email changed!');
@@ -29,6 +32,7 @@ export default function NavbarComponent(){
   
 
   function handleLogout(){
+      setIsLoading(true);
 
       // Send logout request w/ refresh token
       logout(localStorage.getItem("refresh_token"))
@@ -44,6 +48,7 @@ export default function NavbarComponent(){
 
           // set updateUserData to empty object
           updateUserData({})
+          setIsLoading(false);
 
           // navigate('/');
       })
@@ -63,7 +68,8 @@ export default function NavbarComponent(){
               // set updateUserData to empty object
               updateUserData({})
               console.debug('Logout successful! GOTGUUU BITCHHS');
-
+              
+              setIsLoading(false);
               // navigate('/');
           }
       });
@@ -78,20 +84,27 @@ export default function NavbarComponent(){
         <Navbar.Brand className={'pl-16'}>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Airplane_ballonicon2.svg/1280px-Airplane_ballonicon2.svg.png"
-            className="mr-3 h-6 sm:h-9"
+            className="h-6 mr-3 sm:h-9"
             alt="AeroThree Logo"
           />
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+          <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             AeroThree
           </span>
         </Navbar.Brand>
       </Link>
       {
         isUserLoggedIn ?
+        
+        isLoading 
+        ?
+        <div className="flex pr-24 md:order-2">
+          <SpinnerComponent />
+        </div>
+        :
         // If the username or email are null, show a spinner
         // If the username or email are not null, show the avatar and username
         email || username ? (
-          <div className="flex md:order-2 pr-16">
+          <div className="flex pr-16 md:order-2">
             <Dropdown
               arrowIcon={false}
               inline={true}
@@ -99,9 +112,9 @@ export default function NavbarComponent(){
                 <>
                 <Avatar alt="User settings" img={`https://api.dicebear.com/5.x/fun-emoji/svg?seed=${username}`}
                 rounded={true}/>
-                <p className="ml-3 capitalize font-medium text-gray-500">{username}</p>
+                <p className="ml-3 font-medium text-gray-500 capitalize">{username}</p>
                 <FontAwesomeIcon 
-                  className="text-gray-400 ml-3" 
+                  className="ml-3 text-gray-400" 
                   icon={solid('caret-down')} 
                   size="sm"
                 />
@@ -112,7 +125,7 @@ export default function NavbarComponent(){
                 <span className="block text-sm capitalize">
                   {username}
                 </span>
-                <span className="block truncate text-sm font-medium">
+                <span className="block text-sm font-medium truncate">
                   {email}
                 </span>
               </Dropdown.Header>
@@ -132,14 +145,12 @@ export default function NavbarComponent(){
           </div>
         )
         :
-        <>
-        <div className="flex md:order-2 pr-24">
+        <div className="flex pr-24 md:order-2">
           <SpinnerComponent />
         </div>
-        </>
         :
         // Two buttons, register and login
-        <div className="flex md:order-2 pr-16">
+        <div className="flex pr-16 md:order-2">
           <Link to="/register">
             <Button
               className="mr-4 shadow-sm hover:shadow-md bg-sky-500 hover:bg-sky-600 focus:ring-0 focus:border-0"
