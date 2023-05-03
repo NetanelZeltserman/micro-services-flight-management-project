@@ -1,11 +1,10 @@
 import { useState } from "react"
 import Datepicker from "tailwind-datepicker-react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' // regular, brands, icon
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 interface Props{
     title?: string,
-    // onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onChange: any,
     defaultValue: Date
 }
@@ -33,7 +32,6 @@ export const DatePickerInput = ({...props}: Props) => {
             selected: "bg-sky-500 hover:bg-sky-600 hover:shadow-md",
         },
         icons: {
-            // () => ReactNode | JSX.Element
             prev: () => <FontAwesomeIcon icon={solid('left-long')} />,
             next: () => <FontAwesomeIcon icon={solid('right-long')} />,
         },

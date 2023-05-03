@@ -29,14 +29,6 @@ export function FlightForm({onSubmitSend}: Props){
         country_code: string;
     }
 
-    interface RecentFlightsObj {
-        fromLabel: string;
-        fromValue: string;
-
-        toLabel:   string;
-        toValue:   string;
-    }
-
 
     const allAirportsList = useStoreState((state: ApplicationStore) => state!.airports!.data);
 
@@ -51,9 +43,6 @@ export function FlightForm({onSubmitSend}: Props){
     const AWeekFromToday = new Date();
     AWeekFromToday.setDate(AWeekFromToday.getDate() + 12);
     const [departureDate, setDepartingDate] = useState<Date>(AWeekFromToday);
-
-    const [recentFlights, setRecentFlights] = useState<RecentFlightsObj[]>([]);
-
 
 
     // Change later to useState type
@@ -168,8 +157,6 @@ export function FlightForm({onSubmitSend}: Props){
         <h1  className="text-2xl font-medium text-center text-gray-500">Where would you like to go?</h1>
         <p   className="mb-8 text-base text-center text-gray-500">Round and round we go, hopefully to a new destination!</p>
 
-        {/* Add tabs component with "OneWay" tab as :active */}
-
         <Formik
             initialValues={{
                 fromQuery: '',
@@ -181,8 +168,7 @@ export function FlightForm({onSubmitSend}: Props){
             {({setFieldValue}) => {
                 return (
                     <Form>
-                    {/* Wrapper */}
-                    <div className='flex flex-row gap-x-6 justify-between items-center'>
+                    <div className='flex flex-row items-center justify-between gap-x-6'>
 
                         <div className='flex flex-col'>
                             <Label>From:</Label>
@@ -220,7 +206,7 @@ export function FlightForm({onSubmitSend}: Props){
                     </div>
 
                     <div
-                        className='flex flex-row items-center justify-center gap-x-4 mt-2 mb-3 font-medium text-left text-gray-400'
+                        className='flex flex-row items-center justify-center mt-2 mb-3 font-medium text-left text-gray-400 gap-x-4'
                     >
                         {
                             recommendedFlightDestinations.map((val: any, key: any) => {

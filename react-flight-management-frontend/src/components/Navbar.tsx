@@ -11,14 +11,14 @@ import { Actions, useStoreActions, useStoreState } from 'easy-peasy';
 
 export default function NavbarComponent(){
 
-  
+
   const username = useStoreState((state: ApplicationStore) => state!.user!.data)?.username;
   const email    = useStoreState((state: ApplicationStore) => state!.user!.data)?.email;
   const isAdmin  = useStoreState((state: ApplicationStore) => state!.user!.data)?.isAdmin;
 
-  
+
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(isAuthenticted());
-  const updateUserData  = useStoreActions((actions: Actions<ApplicationStore>) => actions.user.updateUserData);
+  const updateUserData                      = useStoreActions((actions: Actions<ApplicationStore>) => actions.user.updateUserData);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,8 +49,6 @@ export default function NavbarComponent(){
           // set updateUserData to empty object
           updateUserData({})
           setIsLoading(false);
-
-          // navigate('/');
       })
       .catch((err) => {
           console.error('Logout error:', err);
@@ -70,7 +68,6 @@ export default function NavbarComponent(){
               console.debug('Logout successful! GOTGUUU BITCHHS');
               
               setIsLoading(false);
-              // navigate('/');
           }
       });
   }
@@ -101,8 +98,6 @@ export default function NavbarComponent(){
           <SpinnerComponent />
         </div>
         :
-        // If the username or email are null, show a spinner
-        // If the username or email are not null, show the avatar and username
         email || username ? (
           <div className="flex pr-16 md:order-2">
             <Dropdown

@@ -9,12 +9,10 @@ import { Formik, Form } from "formik";
 import { ToastContainer, toast } from 'react-toastify';
 import { Input } from "../../components/Input";
 import SpinnerComponent from "../../components/Spinner";
-import 'yup-phone';
 import BookFlightByID from "../api/flights/BookFlightByID";
 import CheckIfUserIsACustomer from "../api/customers/CheckIfUserIsACustomer";
 import { useStoreState } from "easy-peasy";
 import { ApplicationStore } from "../../state";
-import { Button } from "flowbite-react";
 import { ScreenBlockWithImage } from "../../components/ScreenBlock";
 
 
@@ -321,7 +319,7 @@ function BookFlight(){
                         </div>
 
                         {
-                            isUser && (
+                        isUser && (
                         <div className="p-5 overflow-visible bg-gray-100 rounded shadow ">
 
                             <span className="text-xs text-gray-500">Card Type</span>

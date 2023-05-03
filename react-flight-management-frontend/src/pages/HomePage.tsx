@@ -7,7 +7,7 @@ import SpinnerComponent from "../components/Spinner";
 
 export interface FlightObj {
     object: "flight";
-    data: Flight;
+    data:   Flight;
 }
 
 export interface Flight {
@@ -26,7 +26,7 @@ export interface Flight {
     airline_company_code:     string;
     ticket_economy_price:     number;
     remaining_tickets:        number;
-    preview_only?:             boolean;
+    preview_only?:            boolean;
 }
 
 interface ErrorObjInterface {
@@ -39,8 +39,8 @@ interface ErrorObjInterface {
 
 export function HomePage() {
 
-    const [Flights,  setFlights]  = useState<FlightObj[]>([]);
-    const [ErrorObj, setErrorObj] = useState<ErrorObjInterface | null>(null);
+    const [Flights,  setFlights]          = useState<FlightObj[]>([]);
+    const [ErrorObj, setErrorObj]         = useState<ErrorObjInterface | null>(null);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
     function onFlightFormSubmit(e: {
@@ -62,9 +62,10 @@ export function HomePage() {
             setIsSubmitting(false);
         })
         .catch((err) => {
-            setIsSubmitting(false);
             console.error('error in GetFlightsByParams', err.response.data);
             setErrorObj(err.response.data);
+
+            setIsSubmitting(false);
         })
     }
 

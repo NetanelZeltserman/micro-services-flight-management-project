@@ -4,8 +4,6 @@ import { ApplicationStore } from '../state';
 import { useStoreState } from 'easy-peasy';
 import { FlightCard } from '../components/FlightCard';
 import { Flight } from './HomePage';
-import { Button } from 'flowbite-react';
-import { Link } from 'react-router-dom';
 import SpinnerComponent from '../components/Spinner';
 import { ScreenBlockWithImage } from '../components/ScreenBlock';
 
