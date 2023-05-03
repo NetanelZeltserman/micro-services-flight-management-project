@@ -7,11 +7,11 @@ export default function CustomersList(){
 
     return (
         <>
-            <div className="flex justify-center items-center my-4">
+            <div className="flex items-center justify-center my-4">
                 <h1 className="text-xl font-semibold text-gray-600 dark:text-white sm:text-2xl">
                 All Customers
                 </h1>
-                    <div className="ml-auto flex items-center space-x-2 sm:space-x-3">
+                    <div className="flex items-center ml-auto space-x-2 sm:space-x-3">
                         <AddCustomerModal />
                     </div>
             </div>

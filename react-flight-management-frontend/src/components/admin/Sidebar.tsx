@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import {
   HiChartPie,
   HiClipboard,
-  HiCollection,
-  HiInformationCircle,
   HiSearch,
   HiShoppingBag,
 } from "react-icons/hi";
@@ -22,7 +20,7 @@ const ExampleSidebar: FC = function () {
 
   return (
     <Sidebar aria-label="Sidebar with multi-level dropdown example">
-      <div className="flex h-full flex-col justify-between py-2">
+      <div className="flex flex-col justify-between h-full py-2">
         <div>
           <form className="pb-3 md:hidden">
             <TextInput
@@ -60,22 +58,10 @@ const ExampleSidebar: FC = function () {
             </Sidebar.ItemGroup>
             <Sidebar.ItemGroup>
               <Sidebar.Item
-                href="https://github.com/themesberg/flowbite-react/"
+                href="https://github.com/Nati323/micro-services-flight-management-project/"
                 icon={HiClipboard}
               >
                 Docs
-              </Sidebar.Item>
-              <Sidebar.Item
-                href="https://flowbite-react.com/"
-                icon={HiCollection}
-              >
-                Components
-              </Sidebar.Item>
-              <Sidebar.Item
-                href="https://github.com/themesberg/flowbite-react/issues"
-                icon={HiInformationCircle}
-              >
-                Help
               </Sidebar.Item>
             </Sidebar.ItemGroup>
           </Sidebar.Items>

@@ -33,13 +33,20 @@ class CustomerRUD(mixins.ListModelMixin,
         return self.destroy(request, *args, **kwargs)
 
 
-class CustomerList(mixins.ListModelMixin, generics.GenericAPIView):
+class CustomerList(mixins.ListModelMixin,
+                   generics.GenericAPIView,
+                   mixins.CreateModelMixin
+                   ):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
     @method_decorator(user_permissions('view_customer'))
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+    @method_decorator(user_permissions('add_customer'))
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 class GetCustomerFlights(APIView):

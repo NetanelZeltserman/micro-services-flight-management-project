@@ -1301,3 +1301,356 @@ Traceback (most recent call last):
   File "/var/www/micro-services-flight-management-project/FastAPI-flights-API-Microservice/webapp/services.py", line 50, in validate_flights
     if 'codeshared' in flight.keys():
 AttributeError: 'str' object has no attribute 'keys'
+[2023-04-30 19:23:54 +0000] [739295] [DEBUG] Current configuration:
+  config: gunicorn_conf.py
+  wsgi_app: None
+  bind: ['127.0.0.1:8800']
+  backlog: 2048
+  workers: 13
+  worker_class: uvicorn.workers.UvicornWorker
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: True
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /var/www/micro-services-flight-management-project/FastAPI-flights-API-Microservice
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 33
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /var/www/micro-services-flight-management-project/FastAPI-flights-API-Microservice/access_log
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /var/www/micro-services-flight-management-project/FastAPI-flights-API-Microservice/error_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: webapp.application:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7ff5a27fe710>
+  on_reload: <function OnReload.on_reload at 0x7ff5a27fe830>
+  when_ready: <function WhenReady.when_ready at 0x7ff5a27fe950>
+  pre_fork: <function Prefork.pre_fork at 0x7ff5a27fea70>
+  post_fork: <function Postfork.post_fork at 0x7ff5a27feb90>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7ff5a27fecb0>
+  worker_int: <function WorkerInt.worker_int at 0x7ff5a27fedd0>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7ff5a27feef0>
+  pre_exec: <function PreExec.pre_exec at 0x7ff5a27ff010>
+  pre_request: <function PreRequest.pre_request at 0x7ff5a27ff130>
+  post_request: <function PostRequest.post_request at 0x7ff5a27ff1c0>
+  child_exit: <function ChildExit.child_exit at 0x7ff5a27ff2e0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7ff5a27ff400>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7ff5a27ff520>
+  on_exit: <function OnExit.on_exit at 0x7ff5a27ff640>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-04-30 19:23:54 +0000] [739295] [INFO] Starting gunicorn 20.1.0
+[2023-04-30 19:23:54 +0000] [739295] [DEBUG] Arbiter booted
+[2023-04-30 19:23:54 +0000] [739295] [INFO] Listening at: http://127.0.0.1:8800 (739295)
+[2023-04-30 19:23:54 +0000] [739295] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2023-04-30 19:23:54 +0000] [739580] [INFO] Booting worker with pid: 739580
+[2023-04-30 19:23:54 +0000] [739588] [INFO] Booting worker with pid: 739588
+[2023-04-30 19:23:54 +0000] [739589] [INFO] Booting worker with pid: 739589
+[2023-04-30 19:23:54 +0000] [739590] [INFO] Booting worker with pid: 739590
+[2023-04-30 19:23:54 +0000] [739591] [INFO] Booting worker with pid: 739591
+[2023-04-30 19:23:54 +0000] [739580] [INFO] Started server process [739580]
+[2023-04-30 19:23:54 +0000] [739580] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739580] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739593] [INFO] Booting worker with pid: 739593
+[2023-04-30 19:23:54 +0000] [739588] [INFO] Started server process [739588]
+[2023-04-30 19:23:54 +0000] [739588] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739588] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739595] [INFO] Booting worker with pid: 739595
+[2023-04-30 19:23:54 +0000] [739597] [INFO] Booting worker with pid: 739597
+[2023-04-30 19:23:54 +0000] [739589] [INFO] Started server process [739589]
+[2023-04-30 19:23:54 +0000] [739589] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739589] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739598] [INFO] Booting worker with pid: 739598
+[2023-04-30 19:23:54 +0000] [739599] [INFO] Booting worker with pid: 739599
+[2023-04-30 19:23:54 +0000] [739590] [INFO] Started server process [739590]
+[2023-04-30 19:23:54 +0000] [739590] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739590] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739591] [INFO] Started server process [739591]
+[2023-04-30 19:23:54 +0000] [739591] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739591] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739602] [INFO] Booting worker with pid: 739602
+[2023-04-30 19:23:54 +0000] [739603] [INFO] Booting worker with pid: 739603
+[2023-04-30 19:23:54 +0000] [739593] [INFO] Started server process [739593]
+[2023-04-30 19:23:54 +0000] [739593] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739593] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739605] [INFO] Booting worker with pid: 739605
+[2023-04-30 19:23:54 +0000] [739597] [INFO] Started server process [739597]
+[2023-04-30 19:23:54 +0000] [739597] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739597] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739295] [DEBUG] 13 workers
+[2023-04-30 19:23:54 +0000] [739598] [INFO] Started server process [739598]
+[2023-04-30 19:23:54 +0000] [739598] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739598] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739595] [INFO] Started server process [739595]
+[2023-04-30 19:23:54 +0000] [739595] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739595] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739599] [INFO] Started server process [739599]
+[2023-04-30 19:23:54 +0000] [739599] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739599] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739602] [INFO] Started server process [739602]
+[2023-04-30 19:23:54 +0000] [739602] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739602] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739605] [INFO] Started server process [739605]
+[2023-04-30 19:23:54 +0000] [739605] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739605] [INFO] Application startup complete.
+[2023-04-30 19:23:54 +0000] [739603] [INFO] Started server process [739603]
+[2023-04-30 19:23:54 +0000] [739603] [INFO] Waiting for application startup.
+[2023-04-30 19:23:54 +0000] [739603] [INFO] Application startup complete.
+[2023-05-01 15:33:42 +0000] [739295] [INFO] Handling signal: term
+[2023-05-01 15:33:42 +0000] [739589] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739580] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739590] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739595] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739593] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739591] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739598] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739597] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739602] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739599] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739588] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739603] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739605] [INFO] Shutting down
+[2023-05-01 15:33:42 +0000] [739589] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739590] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739598] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739593] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739591] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739598] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739597] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739590] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739598] [INFO] Finished server process [739598]
+[2023-05-01 15:33:42 +0000] [739593] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739591] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739590] [INFO] Finished server process [739590]
+[2023-05-01 15:33:42 +0000] [739593] [INFO] Finished server process [739593]
+[2023-05-01 15:33:42 +0000] [739591] [INFO] Finished server process [739591]
+[2023-05-01 15:33:42 +0000] [739597] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739597] [INFO] Finished server process [739597]
+[2023-05-01 15:33:42 +0000] [739595] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739589] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739580] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739598] [INFO] Worker exiting (pid: 739598)
+[2023-05-01 15:33:42 +0000] [739589] [INFO] Finished server process [739589]
+[2023-05-01 15:33:42 +0000] [739580] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739591] [INFO] Worker exiting (pid: 739591)
+[2023-05-01 15:33:42 +0000] [739580] [INFO] Finished server process [739580]
+[2023-05-01 15:33:42 +0000] [739593] [INFO] Worker exiting (pid: 739593)
+[2023-05-01 15:33:42 +0000] [739590] [INFO] Worker exiting (pid: 739590)
+[2023-05-01 15:33:42 +0000] [739595] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739595] [INFO] Finished server process [739595]
+[2023-05-01 15:33:42 +0000] [739588] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739599] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739602] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739603] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739589] [INFO] Worker exiting (pid: 739589)
+[2023-05-01 15:33:42 +0000] [739599] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739605] [INFO] Waiting for application shutdown.
+[2023-05-01 15:33:42 +0000] [739580] [INFO] Worker exiting (pid: 739580)
+[2023-05-01 15:33:42 +0000] [739595] [INFO] Worker exiting (pid: 739595)
+[2023-05-01 15:33:42 +0000] [739597] [INFO] Worker exiting (pid: 739597)
+[2023-05-01 15:33:42 +0000] [739588] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739588] [INFO] Finished server process [739588]
+[2023-05-01 15:33:42 +0000] [739588] [INFO] Worker exiting (pid: 739588)
+[2023-05-01 15:33:42 +0000] [739603] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739599] [INFO] Finished server process [739599]
+[2023-05-01 15:33:42 +0000] [739602] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739605] [INFO] Application shutdown complete.
+[2023-05-01 15:33:42 +0000] [739599] [INFO] Worker exiting (pid: 739599)
+[2023-05-01 15:33:42 +0000] [739605] [INFO] Finished server process [739605]
+[2023-05-01 15:33:42 +0000] [739605] [INFO] Worker exiting (pid: 739605)
+[2023-05-01 15:33:42 +0000] [739602] [INFO] Finished server process [739602]
+[2023-05-01 15:33:42 +0000] [739602] [INFO] Worker exiting (pid: 739602)
+[2023-05-01 15:33:42 +0000] [739603] [INFO] Finished server process [739603]
+[2023-05-01 15:33:42 +0000] [739603] [INFO] Worker exiting (pid: 739603)
+[2023-05-01 15:33:42 +0000] [739295] [INFO] Shutting down: Master
+[2023-05-01 15:33:43 +0000] [3229763] [DEBUG] Current configuration:
+  config: gunicorn_conf.py
+  wsgi_app: None
+  bind: ['127.0.0.1:8800']
+  backlog: 2048
+  workers: 13
+  worker_class: uvicorn.workers.UvicornWorker
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: True
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /var/www/micro-services-flight-management-project/FastAPI-flights-API-Microservice
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 33
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /var/www/micro-services-flight-management-project/FastAPI-flights-API-Microservice/access_log
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /var/www/micro-services-flight-management-project/FastAPI-flights-API-Microservice/error_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: webapp.application:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f14866d2710>
+  on_reload: <function OnReload.on_reload at 0x7f14866d2830>
+  when_ready: <function WhenReady.when_ready at 0x7f14866d2950>
+  pre_fork: <function Prefork.pre_fork at 0x7f14866d2a70>
+  post_fork: <function Postfork.post_fork at 0x7f14866d2b90>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f14866d2cb0>
+  worker_int: <function WorkerInt.worker_int at 0x7f14866d2dd0>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f14866d2ef0>
+  pre_exec: <function PreExec.pre_exec at 0x7f14866d3010>
+  pre_request: <function PreRequest.pre_request at 0x7f14866d3130>
+  post_request: <function PostRequest.post_request at 0x7f14866d31c0>
+  child_exit: <function ChildExit.child_exit at 0x7f14866d32e0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f14866d3400>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f14866d3520>
+  on_exit: <function OnExit.on_exit at 0x7f14866d3640>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-05-01 15:33:43 +0000] [3229763] [INFO] Starting gunicorn 20.1.0
+[2023-05-01 15:33:43 +0000] [3229763] [DEBUG] Arbiter booted
+[2023-05-01 15:33:43 +0000] [3229763] [INFO] Listening at: http://127.0.0.1:8800 (3229763)
+[2023-05-01 15:33:43 +0000] [3229763] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2023-05-01 15:33:43 +0000] [3229765] [INFO] Booting worker with pid: 3229765
+[2023-05-01 15:33:43 +0000] [3229766] [INFO] Booting worker with pid: 3229766
+[2023-05-01 15:33:43 +0000] [3229767] [INFO] Booting worker with pid: 3229767
+[2023-05-01 15:33:43 +0000] [3229768] [INFO] Booting worker with pid: 3229768
+[2023-05-01 15:33:43 +0000] [3229769] [INFO] Booting worker with pid: 3229769
+[2023-05-01 15:33:43 +0000] [3229770] [INFO] Booting worker with pid: 3229770
+[2023-05-01 15:33:43 +0000] [3229765] [INFO] Started server process [3229765]
+[2023-05-01 15:33:43 +0000] [3229765] [INFO] Waiting for application startup.
+[2023-05-01 15:33:43 +0000] [3229765] [INFO] Application startup complete.
+[2023-05-01 15:33:43 +0000] [3229772] [INFO] Booting worker with pid: 3229772
+[2023-05-01 15:33:43 +0000] [3229776] [INFO] Booting worker with pid: 3229776
+[2023-05-01 15:33:43 +0000] [3229766] [INFO] Started server process [3229766]
+[2023-05-01 15:33:43 +0000] [3229766] [INFO] Waiting for application startup.
+[2023-05-01 15:33:43 +0000] [3229766] [INFO] Application startup complete.
+[2023-05-01 15:33:43 +0000] [3229767] [INFO] Started server process [3229767]
+[2023-05-01 15:33:43 +0000] [3229767] [INFO] Waiting for application startup.
+[2023-05-01 15:33:43 +0000] [3229767] [INFO] Application startup complete.
+[2023-05-01 15:33:43 +0000] [3229788] [INFO] Booting worker with pid: 3229788
+[2023-05-01 15:33:43 +0000] [3229789] [INFO] Booting worker with pid: 3229789
+[2023-05-01 15:33:43 +0000] [3229768] [INFO] Started server process [3229768]
+[2023-05-01 15:33:43 +0000] [3229768] [INFO] Waiting for application startup.
+[2023-05-01 15:33:43 +0000] [3229768] [INFO] Application startup complete.
+[2023-05-01 15:33:43 +0000] [3229834] [INFO] Booting worker with pid: 3229834
+[2023-05-01 15:33:43 +0000] [3229770] [INFO] Started server process [3229770]
+[2023-05-01 15:33:43 +0000] [3229770] [INFO] Waiting for application startup.
+[2023-05-01 15:33:43 +0000] [3229770] [INFO] Application startup complete.
+[2023-05-01 15:33:43 +0000] [3229772] [INFO] Started server process [3229772]
+[2023-05-01 15:33:43 +0000] [3229772] [INFO] Waiting for application startup.
+[2023-05-01 15:33:43 +0000] [3229772] [INFO] Application startup complete.
+[2023-05-01 15:33:43 +0000] [3229769] [INFO] Started server process [3229769]
+[2023-05-01 15:33:43 +0000] [3229769] [INFO] Waiting for application startup.
+[2023-05-01 15:33:43 +0000] [3229769] [INFO] Application startup complete.
+[2023-05-01 15:33:43 +0000] [3230027] [INFO] Booting worker with pid: 3230027
+[2023-05-01 15:33:43 +0000] [3229776] [INFO] Started server process [3229776]
+[2023-05-01 15:33:43 +0000] [3229776] [INFO] Waiting for application startup.
+[2023-05-01 15:33:43 +0000] [3229776] [INFO] Application startup complete.
+[2023-05-01 15:33:43 +0000] [3230194] [INFO] Booting worker with pid: 3230194
+[2023-05-01 15:33:43 +0000] [3229788] [INFO] Started server process [3229788]
+[2023-05-01 15:33:43 +0000] [3229788] [INFO] Waiting for application startup.
+[2023-05-01 15:33:43 +0000] [3229788] [INFO] Application startup complete.
+[2023-05-01 15:33:43 +0000] [3229789] [INFO] Started server process [3229789]
+[2023-05-01 15:33:43 +0000] [3229789] [INFO] Waiting for application startup.
+[2023-05-01 15:33:43 +0000] [3229789] [INFO] Application startup complete.
+[2023-05-01 15:33:43 +0000] [3229763] [DEBUG] 13 workers
+[2023-05-01 15:33:43 +0000] [3229834] [INFO] Started server process [3229834]
+[2023-05-01 15:33:43 +0000] [3229834] [INFO] Waiting for application startup.
+[2023-05-01 15:33:43 +0000] [3229834] [INFO] Application startup complete.
+[2023-05-01 15:33:44 +0000] [3230027] [INFO] Started server process [3230027]
+[2023-05-01 15:33:44 +0000] [3230027] [INFO] Waiting for application startup.
+[2023-05-01 15:33:44 +0000] [3230027] [INFO] Application startup complete.
+[2023-05-01 15:33:44 +0000] [3230194] [INFO] Started server process [3230194]
+[2023-05-01 15:33:44 +0000] [3230194] [INFO] Waiting for application startup.
+[2023-05-01 15:33:44 +0000] [3230194] [INFO] Application startup complete.

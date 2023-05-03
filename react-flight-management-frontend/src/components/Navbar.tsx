@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Avatar, Button, Dropdown, Navbar } from "flowbite-react"
 import { useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom";
@@ -15,6 +14,7 @@ export default function NavbarComponent(){
   
   const username = useStoreState((state: ApplicationStore) => state!.user!.data)?.username;
   const email    = useStoreState((state: ApplicationStore) => state!.user!.data)?.email;
+  const isAdmin  = useStoreState((state: ApplicationStore) => state!.user!.data)?.isAdmin;
 
   
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(isAuthenticted());
@@ -129,13 +129,14 @@ export default function NavbarComponent(){
                   {email}
                 </span>
               </Dropdown.Header>
-              {/* TODO: Add <Link> here to redircet using react-router-dom */}
-              <Dropdown.Item>
-                Lookup a flight
-              </Dropdown.Item>
-              <Dropdown.Item>
+              <Link to='/'>
+                <Dropdown.Item>
+                  Lookup a flight
+                </Dropdown.Item>
+              </Link>
+              {/* <Dropdown.Item>
                 My flights
-              </Dropdown.Item>
+              </Dropdown.Item> */}
               <Dropdown.Divider />
               {/* It was possible to link it to a page but this is the simplest way */}
                 <Dropdown.Item onClick={() => handleLogout()}>
@@ -193,6 +194,7 @@ export default function NavbarComponent(){
         </Navbar.Link>
 
         {
+          (isUserLoggedIn && isAdmin) &&
           <Navbar.Link>
             <NavLink
               to="/admin" 

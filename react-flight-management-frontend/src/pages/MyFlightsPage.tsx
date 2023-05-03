@@ -5,7 +5,7 @@ import { useStoreState } from 'easy-peasy';
 import { FlightCard } from '../components/FlightCard';
 import { FlightObj } from './HomePage';
 
-export default function MyFlights() {
+export default function MyFlightsPage() {
     const userData                  = useStoreState((state: ApplicationStore) => state!.user);
     const [myFlights, setMyFlights] = useState<FlightObj[]>([]);
 
