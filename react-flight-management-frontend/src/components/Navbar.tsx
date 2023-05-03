@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Avatar, Button, Dropdown, Navbar } from "flowbite-react"
 import { useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom";
@@ -15,6 +14,7 @@ export default function NavbarComponent(){
   
   const username = useStoreState((state: ApplicationStore) => state!.user!.data)?.username;
   const email    = useStoreState((state: ApplicationStore) => state!.user!.data)?.email;
+  const isAdmin  = useStoreState((state: ApplicationStore) => state!.user!.data)?.isAdmin;
 
   
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(isAuthenticted());
@@ -62,7 +62,7 @@ export default function NavbarComponent(){
 
               // set updateUserData to empty object
               updateUserData({})
-              console.debug('Logout successful! GOTGUUU BITCHHS');
+              console.debug('Logout successful!');
 
               // navigate('/');
           }
@@ -78,10 +78,10 @@ export default function NavbarComponent(){
         <Navbar.Brand className={'pl-16'}>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Airplane_ballonicon2.svg/1280px-Airplane_ballonicon2.svg.png"
-            className="mr-3 h-6 sm:h-9"
+            className="h-6 mr-3 sm:h-9"
             alt="AeroThree Logo"
           />
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+          <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             AeroThree
           </span>
         </Navbar.Brand>
@@ -91,7 +91,7 @@ export default function NavbarComponent(){
         // If the username or email are null, show a spinner
         // If the username or email are not null, show the avatar and username
         email || username ? (
-          <div className="flex md:order-2 pr-16">
+          <div className="flex pr-16 md:order-2">
             <Dropdown
               arrowIcon={false}
               inline={true}
@@ -99,9 +99,9 @@ export default function NavbarComponent(){
                 <>
                 <Avatar alt="User settings" img={`https://api.dicebear.com/5.x/fun-emoji/svg?seed=${username}`}
                 rounded={true}/>
-                <p className="ml-3 capitalize font-medium text-gray-500">{username}</p>
+                <p className="ml-3 font-medium text-gray-500 capitalize">{username}</p>
                 <FontAwesomeIcon 
-                  className="text-gray-400 ml-3" 
+                  className="ml-3 text-gray-400" 
                   icon={solid('caret-down')} 
                   size="sm"
                 />
@@ -112,17 +112,18 @@ export default function NavbarComponent(){
                 <span className="block text-sm capitalize">
                   {username}
                 </span>
-                <span className="block truncate text-sm font-medium">
+                <span className="block text-sm font-medium truncate">
                   {email}
                 </span>
               </Dropdown.Header>
-              {/* TODO: Add <Link> here to redircet using react-router-dom */}
-              <Dropdown.Item>
-                Lookup a flight
-              </Dropdown.Item>
-              <Dropdown.Item>
+              <Link to='/'>
+                <Dropdown.Item>
+                  Lookup a flight
+                </Dropdown.Item>
+              </Link>
+              {/* <Dropdown.Item>
                 My flights
-              </Dropdown.Item>
+              </Dropdown.Item> */}
               <Dropdown.Divider />
               {/* It was possible to link it to a page but this is the simplest way */}
                 <Dropdown.Item onClick={() => handleLogout()}>
@@ -133,13 +134,13 @@ export default function NavbarComponent(){
         )
         :
         <>
-        <div className="flex md:order-2 pr-24">
+        <div className="flex pr-24 md:order-2">
           <SpinnerComponent />
         </div>
         </>
         :
         // Two buttons, register and login
-        <div className="flex md:order-2 pr-16">
+        <div className="flex pr-16 md:order-2">
           <Link to="/register">
             <Button
               className="mr-4 shadow-sm hover:shadow-md bg-sky-500 hover:bg-sky-600 focus:ring-0 focus:border-0"
@@ -182,6 +183,7 @@ export default function NavbarComponent(){
         </Navbar.Link>
 
         {
+          (isUserLoggedIn && isAdmin) &&
           <Navbar.Link>
             <NavLink
               to="/admin" 

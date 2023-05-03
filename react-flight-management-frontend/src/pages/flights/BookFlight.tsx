@@ -77,7 +77,7 @@ function BookFlight(){
     const [customerName, setCustomerName]             = useState(faker.name.firstName);
     const [customerSurname, setCustomerSurname]       = useState(faker.name.lastName);
     const [customerEmail, setCustomerEmail]           = useState(faker.internet.email);
-    const [customerPhone, setCustomerPhone]           = useState(faker.phone.number('2#########'));
+    const [customerPhone, setCustomerPhone]           = useState(faker.phone.number('0#########'));
     const [customerAddress, setCustomerAddress]       = useState(`${faker.address.streetAddress(true)}, ${faker.address.city()}, ${faker.address.country()}`);
     const [customerCreditCard, setCustomerCreditCard] = useState(faker.finance.creditCardNumber('visa').replaceAll('-', ''));
 
@@ -280,7 +280,7 @@ function BookFlight(){
                                                         <Input name="Email"      label="Email"       />
                                                         <Input name="Phone"      label="Phone"       />
                                                         <Input name="Address"    label="Address"     />
-                                                        <div className="appearance-none pointer-events-none cursor-not-allowed focus:outline-none focus:shadow-outline">
+                                                        <div className="appearance-none cursor-not-allowed pointer-events-none focus:outline-none focus:shadow-outline">
                                                             <Input name="CreditCard" label="Credit Card" readOnly />
                                                         </div>
                                                     </div>

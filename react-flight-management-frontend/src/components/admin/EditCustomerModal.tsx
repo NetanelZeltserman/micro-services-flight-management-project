@@ -24,11 +24,40 @@ interface Props {
     RelatedUser: string;
 }
 
+interface errObject {
+  key: string;
+  message: string;
+}
+
 
 export default function EditUserModal({customerID, firstName, surName, email, address, phoneNumber, creditCard, RelatedUser}: Props) {
-    const [isOpen, setOpen]         = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isOpen, setOpen]                 = useState(false);
+    const [isLoading, setIsLoading]         = useState(false);
+    const [displayErrors, setDisplayErrors] = useState<Array<errObject>>([]);
     const navigate = useNavigate();
+
+
+    function handleDisplayError(key: string, error: string) {
+
+      // If an error already exists for the key, replace it's error with the current one
+      if (displayErrors.some((err) => err.key === key)) {
+        setDisplayErrors(
+          displayErrors.map((err) => {
+            if (err.key === key) {
+              return { key, message: error };
+            }
+            return err;
+          })
+        );
+      }else{
+        // Otherwise, add it (as the error object)
+        setDisplayErrors([...displayErrors, {
+          key: key,
+          message: error,
+        }]);
+      }
+
+    }
 
     function handleSubmit(values: any) {
         setIsLoading(true);
@@ -64,20 +93,30 @@ export default function EditUserModal({customerID, firstName, surName, email, ad
           })
           .catch((error) => {
             console.error('EditCustomer error', error);
-            toast.error(`Something went wrong! ${error.response.data.detail || '500 Error'}`, {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
 
-            setIsLoading(false);
+            // Loop for each key in error object
+            Object.keys(error.response.data).forEach((key) => {
+
+              // Get the value of the key in the error object
+              const value = error.response.data[key];
+
+              handleDisplayError(key, `An error occured in the ${key} field: ${value}`);
+
+              toast.error(`An error has occured!`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+
+              setIsLoading(false);
+            });
           });
-    }
+        }
 
     const CustomerValidation = object().shape({
       firstName:
@@ -101,7 +140,11 @@ export default function EditUserModal({customerID, firstName, surName, email, ad
         .required("This field is required")
         .max(10, "Must be exactly 10 characters")
         .matches(/^\d+$/, 'This field is numeric only'),
-        
+
+      address:
+        string()
+        .required("This field is required")
+        .min(3, "Must be at least 3 characters"),        
 
       credit_card:
         string()
@@ -148,8 +191,27 @@ export default function EditUserModal({customerID, firstName, surName, email, ad
           <Form>
           <Modal.Body>
             {
+              displayErrors.length > 0 &&
+                <div className="w-full p-4 mb-6 bg-red-200 rounded-md shadow-md">
+                  <div className="flex flex-row gap-x-4">
+                    <div>
+                      <p className="text-lg text-red-500">
+                        <span className="ml-2 mr-2 text-lg font-medium text-red-600">Something went wrong!</span>
+                        <ul className="pl-4">
+                          {
+                            displayErrors.map((error) => (
+                              <li key={error.key}>{error.message}</li>
+                            ))
+                          }
+                        </ul>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+            }
+            {
               isLoading ? (
-                <div className="w-full flex justify-center items-center py-24">
+                <div className="flex items-center justify-center w-full py-24">
                   <SpinnerComponent />
                 </div>
               )
@@ -213,12 +275,14 @@ export default function EditUserModal({customerID, firstName, surName, email, ad
                   />
               </div>
               <div>
-                <Label htmlFor="related_user">Related User</Label>
+                <Label htmlFor="related_user">Related User ID</Label>
                   <Input
                     id="related_user"
                     name="related_user"
                     placeholder={RelatedUser}
                     defaultValue={RelatedUser}
+                    // readOnly={true}
+                    // hint="This field is read only"
                   />
               </div>
             </div>

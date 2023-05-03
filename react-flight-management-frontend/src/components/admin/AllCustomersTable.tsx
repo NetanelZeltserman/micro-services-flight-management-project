@@ -6,6 +6,7 @@ import EditCustomerModal from "./EditCustomerModal";
 import { useEffect, useState } from "react";
 import GetCustomersList from "../../pages/api/admin/customers/getCustomersList";
 import SpinnerComponent from "../Spinner";
+import DeleteCustomerModal from "./DeleteCustomerModal";
 
 interface Customer {
     id:          number;
@@ -52,12 +53,14 @@ export default function AllUsersTable() {
           <Table.HeadCell>Related User ID</Table.HeadCell>
           <Table.HeadCell>Actions</Table.HeadCell>
         </Table.Head>
-        <Table.Body className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
+        <Table.Body className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-800">
         {
           isLoading && (
             <Table.Row>
-              <Table.Cell colSpan={6} className="text-center py-16">
-                <SpinnerComponent />
+              <Table.Cell colSpan={6} className="text-center">
+                <div className="py-18">
+                  <SpinnerComponent />
+                </div>
               </Table.Cell>
             </Table.Row>
           )
@@ -68,9 +71,9 @@ export default function AllUsersTable() {
                 <Table.Row className="hover:bg-gray-100 dark:hover:bg-gray-700">
                     <Table.Cell className="w-4 p-4">
                     </Table.Cell>
-                    <Table.Cell className="mr-12 flex items-center space-x-6 whitespace-nowrap p-4 lg:mr-0">
+                    <Table.Cell className="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap lg:mr-0">
                       <img
-                          className="h-10 w-10 rounded-full"
+                          className="w-10 h-10 rounded-full"
                           src={`https://api.dicebear.com/6.x/big-ears-neutral/svg?seed=${customer.email}`}
                           alt="Neil Sims avatar"
                       />
@@ -83,13 +86,13 @@ export default function AllUsersTable() {
                           </div>
                       </div>
                     </Table.Cell>
-                    <Table.Cell className="whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">
+                    <Table.Cell className="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {customer.phone || '—'}
                     </Table.Cell>
-                    <Table.Cell className="whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">
+                    <Table.Cell className="max-w-sm p-4 text-base font-medium text-gray-900 truncate whitespace-nowrap dark:text-white">
                       {customer.address || '—'}
                     </Table.Cell>
-                    <Table.Cell className="whitespace-nowrap p-4 text-base font-normal text-gray-900 dark:text-white">
+                    <Table.Cell className="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
                     <div className="flex items-center">
                       #{customer.user}
                     </div>
@@ -106,7 +109,9 @@ export default function AllUsersTable() {
                             creditCard={customer.credit_card}
                             RelatedUser={customer.user}
                           />
-                          {/* <DeleteCustomerModal /> */}
+                          <DeleteCustomerModal
+                            customerID={customer.id}
+                          />
                       </div>
                     </Table.Cell>
                 </Table.Row>

@@ -65,13 +65,12 @@ class GetCurrentUserDetails(APIView):
         user        = User.objects.filter(id=token_user_id).first()
         permissions = Permission.objects.filter(user=user).all()
 
-        # all_permissions = Permission.objects.all()
 
         return Response({
             'id': token_user_id,
             'username': token_user_username,
             'email': token_user_email,
             'permissions': [p.codename for p in permissions],
-            'isAdmin': user.is_superuser
+            'isAdmin': user.groups.filter(name='Admin').exists()
             # 'all_permissions': all_permissions
         })

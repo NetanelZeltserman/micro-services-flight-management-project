@@ -11,3 +11,4 @@ requests
 django_clearcache
 pycountry
 pytest
+pytest-django

@@ -1,13 +1,15 @@
 import React from 'react'
 import CustomersList from '../../components/admin/CustomersList'
 import ExampleSidebar from '../../components/admin/Sidebar'
+import { ToastContainer } from 'react-toastify';
 
 export default function AdminHomePage() {
   return (
-    <div className='flex justify-center mx-10 my-8 w-full container'>
-        <ExampleSidebar/>
+    <div className='container flex justify-center w-full mx-10 my-8'>
+        <ToastContainer />
+        <ExampleSidebar />
 
-        <div className='ml-16 w-full h-full'>
+        <div className='w-full h-full ml-16'>
           <CustomersList />
         </div>
     </div>

@@ -389,17 +389,15 @@ export const FlightCard: React.FC<Flight> = ({
                                 inline={true}
                                 >
                                 <Dropdown.Item 
-                                    // icon={<FontAwesomeIcon icon={solid('cog')} />}
                                     className="text-red-500 hover:text-white hover:bg-red-500"
                                     onClick={() => ToggleDeleteModal()}
-                                    >
+                                >
                                     Delete
                                 </Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Dropdown.Item 
                                     onClick={() => ToggleEditModal()}
-                                    // icon={<FontAwesomeIcon icon={solid('cog')} />}
-                                    >
+                                >
                                     Edit
                                 </Dropdown.Item>
                         </Dropdown>
