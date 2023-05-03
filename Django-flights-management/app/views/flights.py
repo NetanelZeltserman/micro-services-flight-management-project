@@ -45,16 +45,18 @@ class GetFlightsByParams(APIView):
             return ExceptionsFactory.handle(e)
 
 
-class FlightsCRUD(mixins.ListModelMixin,
-                      mixins.RetrieveModelMixin,
-                      mixins.DestroyModelMixin,
-                      mixins.UpdateModelMixin,
-                      generics.GenericAPIView):
-    
+class FlightsCRUD(
+                mixins.ListModelMixin,
+                mixins.RetrieveModelMixin,
+                mixins.DestroyModelMixin,
+                mixins.UpdateModelMixin,
+                generics.GenericAPIView
+                ):
+
     queryset = Flight.objects.all()
     serializer_class = FlightsSerializer
 
-    @method_decorator(user_permissions('view_flight'))
+    # @method_decorator(user_permissions('view_flight'))
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 

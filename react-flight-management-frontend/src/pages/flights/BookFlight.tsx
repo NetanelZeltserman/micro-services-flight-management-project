@@ -15,6 +15,7 @@ import CheckIfUserIsACustomer from "../api/customers/CheckIfUserIsACustomer";
 import { useStoreState } from "easy-peasy";
 import { ApplicationStore } from "../../state";
 import { Button } from "flowbite-react";
+import { ScreenBlockWithImage } from "../../components/ScreenBlock";
 
 
 function BookFlight(){
@@ -89,6 +90,7 @@ function BookFlight(){
     const [isUserExistingCustomer, setIsUserExistingCustomer] = useState(false);
     const [isUserEXistingCustomerLoading, setIsUserEXistingCustomerLoading] = useState(false);
     const [isUser, setIsUser] = useState(false);
+    const [isFlightBooked, setIsFlightBooked] = useState(false);
 
     
 
@@ -148,12 +150,18 @@ function BookFlight(){
                 .then((response) => {
                     console.debug('Book flight response:', response);
                     toast.success('Flight booked successfully!');
+
+                    setIsFlightBooked(true);
                     setIsLoading(false);
                     setIsUserExistingCustomer(true);
                 })
                 .catch((error) => {
                     console.error('Book flight error:', error);
                     toast.error(error.response.data.custom_message || 'Error booking flight');
+
+                    if (error.response.data.custom_message === 'Flight already booked') {
+                        setIsFlightBooked(true);
+                    }
                     setIsLoading(false);
                 })
     }
@@ -196,7 +204,7 @@ function BookFlight(){
         }
     
     }, [UserData])
-    
+
 
     return( 
         <>
@@ -239,33 +247,41 @@ function BookFlight(){
                             {
                                 (!isUser && !isLoading) && (
                                     <div className="flex flex-col items-center justify-center mt-6 py-14">
-                                        <img
-                                            className="w-40 mb-4"
-                                            src={`${window.location.origin}/undraw_welcome_back.svg`}
-                                            alt="Welcome back"
+                                        <ScreenBlockWithImage
+                                                type="mustBeAUserToContinue"
+                                                title="You must be a user to continue!"
+                                                message="It takes less than a minute to create an account."
+                                                actionBtn={{
+                                                    to:   "/register",
+                                                    text: "Create An Account"
+                                                }}
+                                                noBackground
                                         />
-                                        <h1 className="mt-4 text-xl font-medium text-gray-700">You must be a user to continue!</h1>
-                                        <Link to="/register">
-                                            <Button
-                                                className="mt-4 bg-sky-500 hover:bg-sky-600"
-                                            >
-                                            Create An Account
-                                            </Button>
-                                        </Link>
                                     </div>
                                 )      
                             }
                             {
-                                (isUser && !isUserEXistingCustomerLoading && !isLoading && isUserExistingCustomer) && (
+                                (isFlightBooked && !isLoading)
+                                &&
                                     <div className="flex flex-col items-center justify-center mt-6 py-14">
-                                        <img
-                                            className="w-40 mb-4"
-                                            src={`${window.location.origin}/undraw_welcome_back.svg`}
-                                            alt="Welcome back"
+                                        <ScreenBlockWithImage
+                                                type="flightBooked"
+                                                title="This flight has been booked!"
+                                                message="Sit back and relax, you're all set"
+                                                noBackground
                                         />
-                                        <h1 className="mt-4 text-xl font-medium text-gray-700">Welcome back, {customerName}!</h1>
                                     </div>
-                                )
+                            }
+                            {
+                                (isUser && !isUserEXistingCustomerLoading && !isLoading && isUserExistingCustomer && !isFlightBooked)
+                                &&
+                                    <div className="flex flex-col items-center justify-center mt-6 py-14">
+                                        <ScreenBlockWithImage
+                                                type="welcomeBack"
+                                                title={`Welcome back, ${customerName}!`}
+                                                noBackground
+                                        />
+                                    </div>
                             }
                             {
                                 (isUser && !isUserEXistingCustomerLoading && !isUserExistingCustomer && !isLoading && flight) && (
@@ -410,9 +426,9 @@ function BookFlight(){
                             </div>
 
 
-                            <div className={`${(isLoading || !isUser) && 'cursor-not-allowed'}`}>
+                            <div className={`${(isLoading || !isUser || isFlightBooked) && 'cursor-not-allowed'}`}>
                             <button
-                                className={`${(isLoading || !isUser) && 'pointer-events-none'} w-full h-12 shadow-lg text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:ring-sky-200 rounded focus:outline-none`}
+                                className={`${(isLoading || !isUser || isFlightBooked) && 'pointer-events-none'} w-full h-12 shadow-lg text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:ring-sky-200 rounded focus:outline-none`}
                                 type="submit"
                             >
                                 Book Flight

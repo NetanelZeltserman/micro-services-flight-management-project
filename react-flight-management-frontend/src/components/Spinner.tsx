@@ -1,11 +1,15 @@
 import { Spinner } from "flowbite-react";
-// import tw from "twin.macro";
 
-export default function SpinnerComponent(){
+interface Props {
+    white?: boolean;
+}
+
+
+export default function SpinnerComponent({ white }: Props){
     return (
         <Spinner
             aria-label="Large spinning spinner"
-            className="fill-sky-500"
+            className={`fill-sky-500 ${white && 'text-white'}`}
             light={true}
             size="xl"
         />

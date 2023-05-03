@@ -68,6 +68,28 @@ class Flight(models.Model):
             return False
 
         return True
+    
+    @property
+    def get_origin_country_code_by_country_name(self) -> str:
+        try:
+            # Get origin airport by origin_airport_id and get country_name
+            origin_airport = Airport.objects.get(id=self.origin_airport_id)
+
+            # Get country code by country name
+            return pycountry.countries.search_fuzzy(origin_airport.country_name)[0].alpha_2.lower()
+        except:
+            return ''
+    
+    @property
+    def get_destination_country_code_by_country_name(self) -> str:
+        try:
+            # Get origin airport by origin_airport_id and get country_name
+            destination_airport = Airport.objects.get(id=self.destination_airport_id)
+
+            # Get country code by country name
+            return pycountry.countries.search_fuzzy(destination_airport.country_name)[0].alpha_2.lower()
+        except:
+            return ''
 
 
 class Customer(models.Model):

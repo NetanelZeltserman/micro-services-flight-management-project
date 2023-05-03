@@ -2,7 +2,7 @@ import { FlightCard } from "../components/FlightCard";
 import { FlightForm } from "../components/FlightForm";
 import GetFlightsByParams from "./api/flights/GetFlightsByParams";
 import { useState } from "react";
-import ScreenBlock, { Error } from "../components/ScreenBlock";
+import ScreenBlock, { ScreenBlockWithImage } from "../components/ScreenBlock";
 import SpinnerComponent from "../components/Spinner";
 
 export interface FlightObj {
@@ -26,6 +26,7 @@ export interface Flight {
     airline_company_code:     string;
     ticket_economy_price:     number;
     remaining_tickets:        number;
+    preview_only?:             boolean;
 }
 
 interface ErrorObjInterface {
@@ -104,22 +105,24 @@ export function HomePage() {
                 }
             </div>
             {
-                (!isSubmitting && ErrorObj) && <Error
+                (!isSubmitting && ErrorObj) && <ScreenBlockWithImage
                                 title={ErrorObj.message          || ErrorObj.code}
                                 message={ErrorObj.custom_message || ErrorObj.detail}
                                 type="general"
                             />
             }
             {
-            (!isSubmitting && !ErrorObj && Flights.length === 0) && (
+            (!isSubmitting && !ErrorObj && Flights.length === 0)&& (
                 <ScreenBlock
                     title={'Explore flights around the world'}
                     message={'Round and round we go... Hopefully to a new destination!'}
-                    image={<img
-                                alt="2 Empty Notepads"
-                                className="mb-8 h-60"
-                                src={`${window.location.origin}/main_logo.png`}
-                            />}
+                    image={
+                        <img
+                            alt="2 Empty Notepads"
+                            className="mb-8 h-60"
+                            src={`${window.location.origin}/main_logo.png`}
+                        />
+                    }
                 />
                 )
             }

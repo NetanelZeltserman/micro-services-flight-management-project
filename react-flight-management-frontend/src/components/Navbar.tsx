@@ -129,14 +129,16 @@ export default function NavbarComponent(){
                   {email}
                 </span>
               </Dropdown.Header>
+              <Link to='/myflights'>
+                <Dropdown.Item>
+                  My flights
+                </Dropdown.Item>
+              </Link>
               <Link to='/'>
                 <Dropdown.Item>
                   Lookup a flight
                 </Dropdown.Item>
               </Link>
-              {/* <Dropdown.Item>
-                My flights
-              </Dropdown.Item> */}
               <Dropdown.Divider />
               {/* It was possible to link it to a page but this is the simplest way */}
                 <Dropdown.Item onClick={() => handleLogout()}>
@@ -194,16 +196,29 @@ export default function NavbarComponent(){
         </Navbar.Link>
 
         {
-          (isUserLoggedIn && isAdmin) &&
-          <Navbar.Link>
-            <NavLink
-              to="/admin" 
-              className={({ isActive }) =>
-              isActive ? 'text-sky-500' : 'hover:text-sky-500'}
+          (isUserLoggedIn && isAdmin)
+          ?
+            <Navbar.Link>
+              <NavLink
+                to="/admin" 
+                className={({ isActive }) =>
+                isActive ? 'text-sky-500' : 'hover:text-sky-500'}
+                >
+                Admin Area
+              </NavLink>
+            </Navbar.Link>
+          :
+          (isUserLoggedIn && !isAdmin)
+          &&
+            <Navbar.Link>
+              <NavLink
+                to="/myflights"
+
+                className={({ isActive }) => isActive ? 'text-sky-500' : 'hover:text-sky-500'}
               >
-              Admin Area
-            </NavLink>
-        </Navbar.Link>
+                My Flights
+              </NavLink>
+            </Navbar.Link>
         }
       </Navbar.Collapse>
     </Navbar>

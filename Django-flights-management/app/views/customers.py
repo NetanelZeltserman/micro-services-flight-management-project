@@ -2,7 +2,7 @@ from rest_framework.views  import APIView, Response
 from app.exceptions.factory import ExceptionsFactory
 from app.exceptions.model_not_found import ModelNotFoundException
 from app.permissions.permission import user_permissions
-from app.serializer.flights_serializer import FlightsSerializer
+from app.serializer.flights_serializer import AReadableFlightsSerializer, FlightsSerializer
 from app.services.customers_service import CustomersService
 from app.services.flights_service import FlightService
 from rest_framework import mixins, generics
@@ -50,7 +50,7 @@ class CustomerList(mixins.ListModelMixin,
 
 
 class GetCustomerFlights(APIView):
-    serializer_class = FlightsSerializer
+    serializer_class = AReadableFlightsSerializer
     permission_classes = (IsAuthenticated,)
  
     def get(self, request, customer_id):

@@ -1,7 +1,7 @@
 from app.services.users_service import UsersService
 from ..exceptions.model_not_found import ModelNotFoundException
 from .base_service_interface import BaseServiceInterface
-from ..models import Airport, Flight, Ticket
+from ..models import Airport, Customer, Flight, Ticket
 import requests
 import logging
 
@@ -131,7 +131,7 @@ class FlightService(BaseServiceInterface):
         return airports
 
 
-    def get_all_customer_flights(self, customer_id: int) -> list:
+    def get_all_customer_flights(self, user_id: int) -> list:
         """
         Get all the flights the user booked.
         Wasn't moved to the MS because it doesn't have any business logic.
@@ -145,8 +145,13 @@ class FlightService(BaseServiceInterface):
         Returns:
             list: A list of the flights the user booked.
         """
+        current_customer = Customer.objects.filter(user_id=user_id).first()
 
-        user_tickets = Ticket.objects.filter(customer=customer_id).all()
+        if current_customer == None:
+            logging.error('Customer not found, id: ' + str(user_id))
+            return []
+
+        user_tickets = Ticket.objects.filter(customer=current_customer).all()
         user_flights = []
 
         for ticket in user_tickets:
@@ -155,6 +160,7 @@ class FlightService(BaseServiceInterface):
 
         logging.debug('Returned user flights: ' + str(user_flights))
         return user_flights
+
 
     def update_tickets_and_price(
                                 self,
@@ -174,7 +180,8 @@ class FlightService(BaseServiceInterface):
         logging.debug("FlightService.update_tickets_and_price() called")
 
         # Validate params
-        # TODO: Maybe more are necessary
+        # TODO: Move it to the serializer and check it in the view
+
         if remaining_tickets < 0:
             logging.error('Remaining tickets must be greater than 0')
             raise Exception('Remaining tickets must be greater than 0')
