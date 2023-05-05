@@ -18,19 +18,6 @@ export default function MyFlightsPage() {
 
         if (userData.data){
             setIsUser(true);
-
-            GetCustomerFlights(userData.data!.id)
-            .then((data) => {
-                console.debug('GetCustomerFlights response data:', data)
-                setMyFlights(data)
-
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                console.error(error)
-
-                setIsLoading(false);
-            })
         }else{
             console.debug('User data is empty. User is not logged in.')
 
@@ -39,6 +26,22 @@ export default function MyFlightsPage() {
         }
 
     }, [userData])
+
+    useEffect(() => {
+
+        GetCustomerFlights()
+        .then((data) => {
+            console.debug('GetMyFlights response data:', data)
+            setMyFlights(data)
+
+            setIsLoading(false);
+        })
+        .catch((error) => {
+            console.error(error)
+
+            setIsLoading(false);
+        })
+    }, [])
 
 
     return (
@@ -70,6 +73,19 @@ export default function MyFlightsPage() {
         ?
         <>
         <h1 className="mt-12 text-3xl font-bold text-center text-gray-700">My Flights</h1>
+        {
+            !isLoading && isUser
+            &&
+            <div className="flex items-center justify-center mt-4">
+                <div className="max-w-4xl p-4 mb-6 rounded-md bg-sky-200">
+                <div className="flex flex-row gap-x-4">
+                    <div>
+                        <p className="ml-2 mr-2 text-lg text-sky-600">If you would like to cancel your flight, please call our customer support at <b className='font-medium'>(+1) 1-800-420-CANCEL</b></p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        }
         <div className="grid items-center justify-between mx-auto mt-6 lg:grid-cols-2 xl:grid-cols-3">
         {
             myFlights.map((flight) => {

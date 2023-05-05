@@ -77,7 +77,7 @@ function App() {
 
             <Route
               path="/myflights"
-              element={MyFlightsPage()}
+              element={<MyFlightsPage />}
             />
 
             <Route

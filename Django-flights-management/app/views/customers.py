@@ -49,11 +49,14 @@ class CustomerList(mixins.ListModelMixin,
         return self.create(request, *args, **kwargs)
 
 
-class GetCustomerFlights(APIView):
+class GetMyFlights(APIView):
     serializer_class = AReadableFlightsSerializer
     permission_classes = (IsAuthenticated,)
  
-    def get(self, request, customer_id):
+    def get(self, request):
+
+        customer_id = request.user.id
+
         try:
             # Get the user flights.
             customer_flights = FlightService.get_all_customer_flights(self, customer_id)

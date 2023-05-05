@@ -70,8 +70,8 @@ urlpatterns = [
             name='customers_rud'
             ),
 
-      path('customers/<int:customer_id>/flights/',
-            GetCustomerFlights.as_view(),
+      path('customers/myflights/',
+            GetMyFlights.as_view(),
             name='customers_flights'
             ),
 
