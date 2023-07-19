@@ -3,6 +3,7 @@ from app.exceptions.model_not_found import ModelNotFoundException
 from .base_service_interface import BaseServiceInterface
 from rest_framework_simplejwt.tokens import RefreshToken
 from ..models import User
+from django.core.validators import validate_email
 
 
 
@@ -24,6 +25,14 @@ class UsersService(BaseServiceInterface):
         Returns:
             User: The newly registered user.
         """
+
+        if len(username) < 4:
+            raise InvalidParamsException("the username is too short")
+
+        try:
+            validate_email(email)
+        except ValidationError as e:
+            raise InvalidParamsException("Bad email. Boo.", e)
 
         # Check if user with the given username already exists
         if User.objects.filter(username=username).exists():
