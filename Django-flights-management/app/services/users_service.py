@@ -34,6 +34,9 @@ class UsersService(BaseServiceInterface):
         except ValidationError as e:
             raise InvalidParamsException("Bad email. Boo.", e)
 
+        if len(password) < 8:
+            raise InvalidParamsException("the password is too short")
+
         # Check if user with the given username already exists
         if User.objects.filter(username=username).exists():
             raise InvalidParamsException("User with the given username already exists")
